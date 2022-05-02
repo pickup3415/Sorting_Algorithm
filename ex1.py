@@ -36,11 +36,51 @@ def inser_sort(a):
             j -= 1                      # j를 하나씩 줄이며 비교
         a[j+1] = itme                   # a[j+1]자리에 itme 삽입
 
-   
+
+#병합정렬
+def merge_sort(a):
+     
+    def sort(left, right):
+        if right - left < 2:
+            return
+        mid = (left + right) // 2       
+        sort(left, mid)               
+        sort(mid, right)               
+        merge(left, mid, right)         
+
+    def merge(left, mid, right):
+        tmp = []
+        l, r = left, mid
+
+        while l < mid and r < right:
+            if a[l] < a[r]:             
+                tmp.append(a[l])       
+                l += 1
+            else:
+                tmp.append(a[r])        #
+                r += 1
+
+        while l < mid:              
+            tmp.append(a[l])       
+            l += 1
+        while r < right:           
+            tmp.append(a[r])       
+            r += 1
+
+        for i in range(left, right):    
+            a[i] = tmp[i - left]
+
+    return sort(0, len(a))
+
+
+        
+
 ls = [x for x in range(m)] #  m개의 원소를 갖는 리스트
 random.shuffle(ls) # 정렬하기 전 랜덤으로 섞기
 ls2 = ls[:] # 버블 정렬에 사용하는 리스트
 ls3 = ls[:] # 삽입 정렬에 사용하는리스트
+ls4 = ls[:] # 병합 정렬에 사용하는 리스트
+
 
 start = time.time()   
 selec_sort(ls) # 선택 정렬 실행 시간
@@ -55,6 +95,9 @@ star = time.time()
 inser_sort(ls3) # 삽입 정렬 실행 시간
 inser_time = time.time() - start
 
+star = time.time()
+merge_sort(ls4) # 병합 정렬 실행 시간
+merge_time = time.time() - start
 
 # 출력문 ㅎㅎ
 print("<<<선택 정렬>>>")
@@ -64,4 +107,8 @@ print("<<<버블 정렬>>>")
 print("실행시간 : ", bubble_time,"\n")
 
 print("<<<삽입 정렬>>>")
-print("실행시간 : ", inser_time)
+print("실행시간 : ", inser_time,"\n")
+
+print("<<<병합 정렬>>>")
+print("실행시간 : ", merge_time)
+
