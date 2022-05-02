@@ -57,7 +57,7 @@ def merge_sort(a):
                 tmp.append(a[l])       
                 l += 1
             else:
-                tmp.append(a[r])        #
+                tmp.append(a[r])        
                 r += 1
 
         while l < mid:              
